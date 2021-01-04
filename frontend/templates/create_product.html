@@ -1,0 +1,25 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h3>Create Product</h3>
+    <form action="/products" method="GET">
+        <ul>
+            <li>
+                <input type="text" id="name_input" name="name">
+                <label for="name_input">Name</label>
+            </li>
+
+            <li>
+                <input type="text" id="description_input" name="description">
+                <label for="description_input">Description</label>
+            </li>
+            <li>
+                <input type="text" id="price_input" name="price">
+                <label for="price_input">Price</label>
+            </li>
+            <li>
+                <input type="submit" id="submit" name="submit">
+            </li>
+        </ul>
+    </form>
+{% endblock %}

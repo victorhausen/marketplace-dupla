@@ -10,8 +10,8 @@ from backend.controller import Controller
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-marketplace_controller = Controller("marketplace_database.txt")
-product_controller = Controller("product_database.txt")
+marketplace_controller = Controller("./database/marketplace_database.txt")
+product_controller = Controller("./database/product_database.txt")
 
 @app.route('/')
 def index():
@@ -33,7 +33,16 @@ def marketplaces():
 
 @app.route('/products')
 def products():
-    
+    if request.args:
+        data = {
+            "name": request.args["name"],
+            "description": request.args["description"],
+            "price":request.args["price"]
+        }
+        product_controller.create(data)
+
+        redirect("/")
+
     return render_template('create_product.html')
 
 
