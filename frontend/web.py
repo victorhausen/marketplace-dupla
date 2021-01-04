@@ -4,8 +4,10 @@ import sys
 
 from werkzeug.utils import redirect
 sys.path.append('f:\projetos\olistprojetos\marketplacesduplas\marketplace-dupla')
+sys.path.append('/home/victor/Documents/marketplace-dupla')
 
 from backend.controller import Controller
+from backend.log import write_log
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -26,7 +28,7 @@ def marketplaces():
             "description": request.args["description"]
         }
         marketplace_controller.create(data)
-
+        write_log(action="create",type="marketplace")
         redirect("/")
 
     return render_template('create_marketplace.html')
@@ -40,7 +42,8 @@ def products():
             "price":request.args["price"]
         }
         product_controller.create(data)
-
+        write_log(action="create",type="product")
+        
         redirect("/")
 
     return render_template('create_product.html')

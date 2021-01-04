@@ -1,1 +1,7 @@
 {'name': 'asdas', 'description': 'dasdasd', 'price': 'zxzxc'}
+{'name': 'a', 'description': '', 'price': ''}
+{'name': 'a', 'description': 'a', 'price': 'a'}
+{'name': 'a', 'description': 'a', 'price': 'a'}
+{'name': 'a', 'description': '', 'price': ''}
+{'name': 'teste', 'description': 'teste', 'price': '321'}
+{'name': 'teste', 'description': 'teste', 'price': '321'}
