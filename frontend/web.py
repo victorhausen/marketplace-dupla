@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 import sys
 
 from werkzeug.utils import redirect
-sys.path.append('f:\projetos\olistprojetos\marketplacesduplas\marketplace-dupla')
+#sys.path.append('f:\projetos\olistprojetos\marketplacesduplas\marketplace-dupla')
 sys.path.append('/home/victor/Documents/marketplace-dupla')
 
 from backend.controller import Controller
