@@ -36,5 +36,5 @@ class Controller:
                 'description': json_product['description'],
                 'price': json_product['price']
             }
-            lista_market.append(market)
-        return lista_market
+            lista_product.append(market)
+        return lista_product
