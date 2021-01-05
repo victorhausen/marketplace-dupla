@@ -5,3 +5,4 @@
 {'name': 'a', 'description': '', 'price': ''}
 {'name': 'teste', 'description': 'teste', 'price': '321'}
 {'name': 'teste', 'description': 'teste', 'price': '321'}
+{'name': 'Roupa', 'description': 'Blusa decotada ', 'price': '20.00'}

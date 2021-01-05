@@ -1,2 +1,3 @@
 {'name': 'Americanas', 'description': 'asdasd'}
 {'name': 'nome marketplace', 'description': 'descricao'}
+{'name': 'Amazon', 'description': 'Maior marketplace '}

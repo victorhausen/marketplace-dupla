@@ -4,7 +4,7 @@ import sys
 
 from werkzeug.utils import redirect
 #sys.path.append('f:\projetos\olistprojetos\marketplacesduplas\marketplace-dupla')
-sys.path.append('/home/victor/Documents/marketplace-dupla')
+sys.path.append('/home/quesia/marketplace-dupla')
 
 from backend.controller import Controller
 from backend.log import write_log
@@ -47,6 +47,12 @@ def products():
         redirect("/")
 
     return render_template('create_product.html')
+
+@app.route('/lista_marketplaces')
+def listar_marketplace():
+    lista_marketplace = marketplace_controller.get_marketplace()
+    write_log(action='read', type='marketplace')
+    return render_template('list_marketplace.html', listar = lista_marketplace)
 
 
 app.run(debug=True)
