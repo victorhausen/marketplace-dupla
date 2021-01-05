@@ -4,7 +4,8 @@ import sys
 
 from werkzeug.utils import redirect
 #sys.path.append('f:\projetos\olistprojetos\marketplacesduplas\marketplace-dupla')
-sys.path.append('/home/victor/Documents/marketplace-dupla')
+#sys.path.append('/home/victor/Documents/marketplace-dupla')
+sys.path.append('.')
 
 from backend.controller import Controller
 from backend.log import write_log
@@ -12,9 +13,11 @@ from backend.log import write_log
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-marketplace_controller = Controller("./database/marketplace_database.txt")
-product_controller = Controller("./database/product_database.txt")
-
+marketplace_controller = Controller("database/marketplace_database.txt")
+product_controller = Controller("database/product_database.txt")
+lista_produtos = product_controller.get_product()
+for a in lista_produtos:
+    print(a['name'])
 @app.route('/')
 def index():
     return render_template('base_template.html')
@@ -47,6 +50,8 @@ def products():
         redirect("/")
 
     return render_template('create_product.html')
-
-
+@app.route('/list_products')
+def listar_produtos():
+    lista_produtos = product_controller.get_product()
+    return render_template('list_product.html', produtos = lista_produtos)
 app.run(debug=True)
