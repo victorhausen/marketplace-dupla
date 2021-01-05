@@ -51,5 +51,6 @@ def products():
 @app.route('/list_products')
 def listar_produtos():
     lista_produtos = product_controller.get_product()
+    write_log(action="list",type="products")
     return render_template('list_product.html', produtos = lista_produtos)
 app.run(debug=True)
