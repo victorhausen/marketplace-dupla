@@ -66,7 +66,7 @@ def listar_produtos():
 def sellers():
     if request.args:
         data = {
-            'full_name': request.args['name'],
+            'full_name': request.args['full_name'],
             'contact': request.args['contact_number'],
             'email': request.args['seller_email']
         }
@@ -77,7 +77,7 @@ def sellers():
 
 @app.route('/list_sellers')
 def list_sellers():
-    sellers_list = seller_controller.get_product()
+    sellers_list = seller_controller.get_seller()
     write_log(action="list",type="sellers")
     return render_template('list_seller.html', sellers = sellers_list)
 app.run(debug=True)
