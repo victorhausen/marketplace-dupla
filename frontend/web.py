@@ -74,4 +74,10 @@ def sellers():
         write_log(action='register', type='seller')
     write_log(action="list",type="products")
     return render_template('register_seller.html', produtos = lista_produtos)
+
+@app.route('/list_sellers')
+def list_sellers():
+    sellers_list = seller_controller.get_product()
+    write_log(action="list",type="sellers")
+    return render_template('list_seller.html', sellers = sellers_list)
 app.run(debug=True)
