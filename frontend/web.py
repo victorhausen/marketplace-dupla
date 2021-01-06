@@ -13,7 +13,7 @@ from backend.log import write_log
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-
+seller_controller = Controller("database/seller_database.txt")
 marketplace_controller = Controller("database/marketplace_database.txt")
 product_controller = Controller("database/product_database.txt")
 lista_produtos = product_controller.get_product()
@@ -61,4 +61,17 @@ def listar_produtos():
     lista_produtos = product_controller.get_product()
     write_log(action="list",type="products")
     return render_template('list_product.html', produtos = lista_produtos)
+
+@app.route('/sellers')
+def sellers():
+    if request.args:
+        data = {
+            'full_name': request.args['name'],
+            'contact': request.args['contact_number'],
+            'email': request.args['seller_email']
+        }
+        seller_controller.create(data)
+        write_log(action='register', type='seller')
+    write_log(action="list",type="products")
+    return render_template('register_seller.html', produtos = lista_produtos)
 app.run(debug=True)
