@@ -16,7 +16,11 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 marketplace_controller = Controller("database/marketplace_database.txt")
 product_controller = Controller("database/product_database.txt")
+categories_controller = Controller("database/categories_database.txt")
 lista_produtos = product_controller.get_product()
+lista_categories = categories_controller.get_categories()
+
+
 @app.route('/')
 def index():
     return render_template('base_template.html')
@@ -61,4 +65,24 @@ def listar_produtos():
     lista_produtos = product_controller.get_product()
     write_log(action="list",type="products")
     return render_template('list_product.html', produtos = lista_produtos)
+
+@app.route('/categories')
+def cadastrar_categorias():
+    if request.args:
+        data = {
+            "name": request.args["name"],
+            "description": request.args["description"]
+        }
+        categories_controller.create(data)
+        write_log(action="create", type="category")
+        redirect("/")
+    return render_template('create_categories.html')
+
+@app.route('/list_categories')
+def listar_categories():
+    lista_categorias = categories_controller.get_categories()
+    write_log(action="list", type="categories")
+    return render_template('list_categories.html', lista = lista_categorias)
+
+
 app.run(debug=True)
