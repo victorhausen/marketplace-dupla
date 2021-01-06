@@ -1,0 +1,24 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h3>Register Seller</h3>
+    <form action="/marketplaces" method="GET">
+        <ul>
+            <li>
+                <input type="text" id="name_input" name="name">
+                <label for="name_input">Full name</label>
+            </li>
+            <li>
+                <input type="text" id="description_input" name="contact_number">
+                <label for="contact_input">Contact number</label>
+            </li>
+            <li>
+                <input type="text" id="description_input" name="seller_mail">
+                <label for="email_input">Email</label>
+            </li>
+            <li>
+                <input type="submit" id="submit" name="submit">
+            </li>
+        </ul>
+    </form>
+{% endblock %}
