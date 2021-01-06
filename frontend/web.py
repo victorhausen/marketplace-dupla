@@ -4,6 +4,7 @@ import sys
 
 from werkzeug.utils import redirect
 #sys.path.append('f:\projetos\olistprojetos\marketplacesduplas\marketplace-dupla')
+#sys.path.append('/home/victor/Documents/marketplace-dupla')
 sys.path.append('/home/quesia/marketplace-dupla')
 
 from backend.controller import Controller
