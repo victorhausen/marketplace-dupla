@@ -62,7 +62,6 @@ class Controller:
             }
             list_seller.append(product)
         return list_seller
-
     def get_log(self)-> None:
         lista_log = []
         self.arquivo = open('log.txt', 'r')
@@ -73,6 +72,7 @@ class Controller:
                 'type': intermediario['type'],
             }
             lista_log.append(produto)
+
         return lista_log
     
 
