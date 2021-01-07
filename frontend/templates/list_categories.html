@@ -1,0 +1,24 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<table>
+    <thead>
+    </tr>
+        <th>Name: </th>
+        <th>Description: </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in lista %}
+    <tr>
+        <td>{{i['name']}}</td>
+        <td>{{i['description']}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+
+{% endblock %}
