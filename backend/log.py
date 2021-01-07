@@ -9,6 +9,10 @@ def retorna_data():
 
 def write_log(action, type):
     file = open("log.txt", "a")
-    file.write(f"{action} {type} [{retorna_data()}]\n")
+    data = {
+        'action': action,
+        'type': type
+    }
+    file.write(str(data)+"\n")
     file.close()
     # "create marketplace [%d/%m/%Y %H:%M:%S]"
