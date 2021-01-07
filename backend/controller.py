@@ -62,5 +62,17 @@ class Controller:
             }
             list_seller.append(product)
         return list_seller
+
+    def get_log()-> None:
+        lista_log = []
+        arquivo = open('log.txt', 'r')
+        for a in arquivo:
+            intermediario = json.loads(a.replace("'", '"'))
+            produto = {
+                'action': intermediario['action'],
+                'type': intermediario['type'],
+            }
+            lista_log.append(produto)
+        return lista_log
     
 

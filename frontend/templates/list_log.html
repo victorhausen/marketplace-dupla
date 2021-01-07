@@ -1,0 +1,24 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<table>
+    <thead>
+    </tr>
+        <th>Action: </th>
+        <th>Type: </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in log %}
+    <tr>
+        <td>{{i['action']}}</td>
+        <td>{{i['type']}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+
+{% endblock %}

@@ -17,6 +17,7 @@ seller_controller = Controller("database/seller_database.txt")
 marketplace_controller = Controller("database/marketplace_database.txt")
 product_controller = Controller("database/product_database.txt")
 categories_controller = Controller("database/categories_database.txt")
+log_controller = Controller("log.txt")
 lista_produtos = product_controller.get_product()
 lista_categories = categories_controller.get_categories()
 
@@ -105,4 +106,11 @@ def list_sellers():
     sellers_list = seller_controller.get_seller()
     write_log(action="list",type="sellers")
     return render_template('list_seller.html', sellers = sellers_list)
+
+@app.route('/list_log')
+def lista_log():
+    log_list = log_controller.get_log()
+    write_log(action=action,type=type)
+    return render_template('list_log.html', log = log_list)
+
 app.run(debug=True)
