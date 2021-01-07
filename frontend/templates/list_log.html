@@ -1,0 +1,29 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<table>
+    <thead>
+    </tr>
+        <th>Action: </th>
+        <th>Type: </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in log %}
+    <tr>
+        {% if i['action'] == 'list' %}
+            <td style="background-color:red">{{i['action']}}</td>
+        {% endif %}
+        {% if i['action'] == 'create' %}
+            <td style="background-color:blue">{{i['action']}}</td>
+        {% endif %}
+        <td>{{i['type']}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+
+{% endblock %}
