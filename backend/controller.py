@@ -63,10 +63,10 @@ class Controller:
             list_seller.append(product)
         return list_seller
 
-    def get_log()-> None:
+    def get_log(self)-> None:
         lista_log = []
-        arquivo = open('log.txt', 'r')
-        for a in arquivo:
+        self.arquivo = open('log.txt', 'r')
+        for a in self.arquivo:
             intermediario = json.loads(a.replace("'", '"'))
             produto = {
                 'action': intermediario['action'],

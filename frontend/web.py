@@ -110,7 +110,7 @@ def list_sellers():
 @app.route('/list_log')
 def lista_log():
     log_list = log_controller.get_log()
-    write_log(action=action,type=type)
+    write_log(action="list",type="log")
     return render_template('list_log.html', log = log_list)
 
 app.run(debug=True)
