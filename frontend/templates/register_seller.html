@@ -1,0 +1,24 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h3>Register Seller</h3>
+    <form action="/sellers" method="GET">
+        <ul>
+            <li>
+                <label for="name_input">Full name</label>
+                <input type="text" id="name_input" name="full_name">
+            </li>
+            <li>
+                <label for="contact_input">Contact number</label>
+                <input type="text" id="description_input" name="contact_number">
+            </li>
+            <li>
+                <label for="email_input">Email</label>
+                <input type="text" id="description_input" name="seller_email">
+            </li>
+            <li>
+                <input type="submit" id="submit" name="submit">
+            </li>
+        </ul>
+    </form>
+{% endblock %}

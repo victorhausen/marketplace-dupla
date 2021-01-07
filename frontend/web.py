@@ -13,7 +13,7 @@ from backend.log import write_log
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-
+seller_controller = Controller("database/seller_database.txt")
 marketplace_controller = Controller("database/marketplace_database.txt")
 product_controller = Controller("database/product_database.txt")
 categories_controller = Controller("database/categories_database.txt")
@@ -66,6 +66,7 @@ def listar_produtos():
     write_log(action="list",type="products")
     return render_template('list_product.html', produtos = lista_produtos)
 
+
 @app.route('/categories')
 def cadastrar_categorias():
     if request.args:
@@ -85,4 +86,23 @@ def listar_categories():
     return render_template('list_categories.html', lista = lista_categorias)
 
 
+
+@app.route('/sellers')
+def sellers():
+    if request.args:
+        data = {
+            'full_name': request.args['full_name'],
+            'contact': request.args['contact_number'],
+            'email': request.args['seller_email']
+        }
+        seller_controller.create(data)
+        write_log(action='register', type='seller')
+    write_log(action="list",type="products")
+    return render_template('register_seller.html', produtos = lista_produtos)
+
+@app.route('/list_sellers')
+def list_sellers():
+    sellers_list = seller_controller.get_seller()
+    write_log(action="list",type="sellers")
+    return render_template('list_seller.html', sellers = sellers_list)
 app.run(debug=True)

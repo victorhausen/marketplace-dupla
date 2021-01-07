@@ -37,6 +37,7 @@ class Controller:
             lista_product.append(product)
         return lista_product
 
+
     def get_categories(self)-> None:
         list_categories = []
         self.arquivo = open(self.path, 'r')
@@ -48,3 +49,18 @@ class Controller:
             }
             list_categories.append(categories)
         return list_categories
+      
+    def get_seller(self)-> None:
+        list_seller = []
+        self.arquivo = open(self.path, 'r')
+        for a in self.arquivo:
+            intermediario = json.loads(a.replace("'", '"'))
+            product = {
+                'full_name': intermediario['full_name'],
+                'contact': intermediario['contact'],
+                'email': intermediario['email']
+            }
+            list_seller.append(product)
+        return list_seller
+    
+
