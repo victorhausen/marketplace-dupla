@@ -1,6 +1,7 @@
-from .connection import db
+from .connection import db_connection
 
 def create_category_db(category) -> None:
+    db = db_connection()
     cursor = db.cursor()
     name = category.get('name')
     description = category.get('description')
@@ -8,9 +9,11 @@ def create_category_db(category) -> None:
     cursor.execute("INSERT INTO category(name, description) values(%s, %s);", values)
     db.commit()
     cursor.close()
+    db.close()
 
 def get_categories_db() -> list:
     categories = []
+    db = db_connection()
     cursor = db.cursor()
     cursor.execute("SELECT name, description FROM category;")
     list_categories = cursor.fetchall()
@@ -23,4 +26,5 @@ def get_categories_db() -> list:
         categories.append(category)
 
     cursor.close()
+    db.close()
     return categories;

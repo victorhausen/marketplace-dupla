@@ -1,6 +1,7 @@
-from .connection import db
+from .connection import db_connection
 
 def create_seller_db(seller) -> None:
+    db = db_connection()
     cursor = db.cursor()
     name = seller.get('full_name')
     email = seller.get('seller_email')
@@ -10,9 +11,11 @@ def create_seller_db(seller) -> None:
 
     db.commit()
     cursor.close()
+    db.close()
 
 def get_sellers_db() -> list:
     sellers = []
+    db = db_connection()
     cursor = db.cursor()
     cursor.execute("SELECT name, email, phone FROM seller;")
     list_sellers = cursor.fetchall()
@@ -26,4 +29,5 @@ def get_sellers_db() -> list:
         sellers.append(seller)
 
     cursor.close()
+    db.close()
     return sellers;
