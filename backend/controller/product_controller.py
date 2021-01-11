@@ -1,4 +1,4 @@
-from ..dao_txt.product_dao_txt import create_product, get_products
+from ..dao_db.product_dao_db import create_product, get_products
 
 def creating_product(name, description, price)-> None:
         create_product(name, description, price)

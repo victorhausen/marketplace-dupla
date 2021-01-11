@@ -5,6 +5,7 @@
 <table>
     <thead>
     </tr>
+        <th>Date: </th>
         <th>Action: </th>
         <th>Type: </th>
     </tr>
@@ -12,6 +13,7 @@
     <tbody>
     {% for i in log %}
     <tr>
+        <td>{{i['date']}}</td>
         {% if i['action'] == 'list' %}
             <td style="background-color:red">{{i['action']}}</td>
         {% endif %}

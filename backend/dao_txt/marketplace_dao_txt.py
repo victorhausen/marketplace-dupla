@@ -8,7 +8,7 @@ def create_marketplace(name, description)-> None:
             file_.write(marketplace)
 
 def get_marketplaces() -> None:
-        list_marketplace = []
+        list_marketplaces = []
         with open(_marketplace_path, 'r') as file_:
             for a in file_:
                 b = json.loads(a.replace("'", '"'))
@@ -16,5 +16,5 @@ def get_marketplaces() -> None:
                     'name': b['name'],
                     'description': b['description']
                 }
-                list_marketplace.append(mrktplace)
-        return list_marketplace
+                list_marketplaces.append(mrktplace)
+        return list_marketplaces

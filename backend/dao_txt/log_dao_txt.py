@@ -3,9 +3,15 @@ from datetime import datetime
 
 _log_path = "database/log_database.txt"
 
+def current_date():
+    data_atual = datetime.now()
+    data_completa = data_atual.strftime("%d/%m/%Y %H:%M:%S")
+    return data_completa
+
 def generate_log(action, type):
     with open(_log_path, "a") as file_:
         data = {
+            'date': current_date(),
             'action': action,
             'type': type
         }
@@ -17,6 +23,7 @@ def list_logs()-> None:
             for a in file_:
                 intermediario = json.loads(a.replace("'", '"'))
                 logs = {
+                    'date': intermediario['date'],
                     'action': intermediario['action'],
                     'type': intermediario['type'],
                 }

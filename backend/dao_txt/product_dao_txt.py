@@ -8,7 +8,7 @@ def create_product(name, description, price)-> None:
             file_.write(product)
 
 def get_products()-> None:
-        lista_product = []
+        lista_products = []
         with open(_product_path, 'r') as file_:
             for a in file_:
                 intermediario = json.loads(a.replace("'", '"'))
@@ -17,5 +17,5 @@ def get_products()-> None:
                     'description': intermediario['description'],
                     'price': intermediario['price']
                 }
-                lista_product.append(product)
-        return lista_product
+                lista_products.append(product)
+        return lista_products
