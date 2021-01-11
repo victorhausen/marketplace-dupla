@@ -1,2 +1,0 @@
-{'action': 'read', 'type': 'marketplace'}
-{'action': 'read', 'type': 'marketplace'}

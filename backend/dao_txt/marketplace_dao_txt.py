@@ -7,10 +7,10 @@ def create_marketplace(data)-> None:
         arquivo.write(str(data)+"\n")
         arquivo.close()
 
-def get_marketplaces(self) -> None:
+def get_marketplaces() -> None:
         list_marketplace = []
-        self.arquivo = open(self.path, 'r')
-        for a in self.arquivo:
+        arquivo = open(_marketplace_path, 'r')
+        for a in arquivo:
             b = json.loads(a.replace("'", '"'))
             mrktplace = {
                 'name': b['name'],

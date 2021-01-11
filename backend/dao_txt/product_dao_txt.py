@@ -7,10 +7,10 @@ def create_product(data)-> None:
         arquivo.write(str(data)+"\n")
         arquivo.close()
 
-def get_products(self)-> None:
+def get_products()-> None:
         lista_product = []
-        self.arquivo = open(self.path, 'r')
-        for a in self.arquivo:
+        arquivo = open(_product_path, 'r')
+        for a in arquivo:
             intermediario = json.loads(a.replace("'", '"'))
             product = {
                 'name': intermediario['name'],
