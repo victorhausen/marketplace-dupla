@@ -2,6 +2,14 @@ import json
 
 _path = 'backend/database/categories_database.txt'
 
+def create_seller(seller) -> list:
+    name = seller.get('nome')
+    email = seller.get('email')
+    phone = seller.get('phone')
+    arquivo = open(_path, 'a')
+    arquivo.write(f'{name};{email};{phone}\n')
+    arquivo.close()
+
 def get_seller() -> list:
     list_seller = []
     archive = open(_path, 'r')
