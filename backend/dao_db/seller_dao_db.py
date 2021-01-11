@@ -1,4 +1,5 @@
 from .connection import db_connection
+from ..controller.log_controller import write_log
 
 def create_seller_db(seller) -> None:
     db = db_connection()
@@ -12,6 +13,7 @@ def create_seller_db(seller) -> None:
     db.commit()
     cursor.close()
     db.close()
+    write_log(action='create', type='seller')
 
 def get_sellers_db() -> list:
     sellers = []
@@ -30,4 +32,5 @@ def get_sellers_db() -> list:
 
     cursor.close()
     db.close()
+    write_log(action='list', type='seller')
     return sellers;

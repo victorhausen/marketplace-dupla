@@ -1,4 +1,5 @@
 import json
+from ..controller.log_controller import write_log
 
 _path = 'database/categories_database.txt'
 
@@ -9,6 +10,7 @@ def create_category(category) -> list:
     arquivo = open(_path, 'a')
     arquivo.write(string)
     arquivo.close()
+    write_log(action='create', type='category')
 
 def get_categories() -> list:
     list_categories = []
@@ -20,4 +22,5 @@ def get_categories() -> list:
             'description': categoria['description']
         }
         list_categories.append(categories)
+    write_log(action='list', type='category')
     return list_categories
