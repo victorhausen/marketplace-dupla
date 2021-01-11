@@ -57,12 +57,13 @@ def listar_produtos():
 '''
 
 
-@app.route('/categories', methods=['POST'])
+@app.route('/categories', methods=['GET', 'POST'])
 def cadastrar_categorias():
-    data = request.form
-    creating_category(data)
-    write_log(action="create", type="category")
-    redirect("/")
+    if request.method == 'POST':
+        data = request.form
+        creating_category(data)
+        write_log(action="create", type="category")
+        redirect("/")
     return render_template('create_categories.html')
 
 @app.route('/list_categories')
@@ -72,12 +73,13 @@ def listar_categories():
     return render_template('list_categories.html', lista = lista_categorias)
 
 
-@app.route('/sellers', methods=['POST'])
+@app.route('/sellers', methods=['GET', 'POST'])
 def sellers():
-    data = request.form
-    creating_seller(data)
-    write_log(action='register', type='seller')
-    return render_template('register_seller.html')
+    if request.method == 'POST':
+        data = request.form
+        creating_seller(data)
+        write_log(action='register', type='seller')
+    return render_template('create_seller.html')
 
 @app.route('/list_sellers')
 def list_seller():

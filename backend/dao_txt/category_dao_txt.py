@@ -1,12 +1,13 @@
 import json
 
-_path = 'backend/database/categories_database.txt'
+_path = 'database/categories_database.txt'
 
 def create_category(category) -> list:
-    name = category.get('nome')
+    name = category.get('name')
     description = category.get('description')
+    string = '{' + f"'name': '{name}', 'description': '{description}'" + '}\n'
     arquivo = open(_path, 'a')
-    arquivo.write(f'{name};{description}\n')
+    arquivo.write(string)
     arquivo.close()
 
 def get_categories() -> list:

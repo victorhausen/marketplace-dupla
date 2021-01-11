@@ -1,13 +1,14 @@
 import json
 
-_path = 'backend/database/categories_database.txt'
+_path = 'database/seller_database.txt'
 
 def create_seller(seller) -> list:
-    name = seller.get('nome')
+    name = seller.get('full_name')
     email = seller.get('email')
-    phone = seller.get('phone')
+    phone = seller.get('contact')
+    string = '{' + f"'full_name': '{name}', 'contact': '{email}', 'email': '{phone}'" + '}\n'
     arquivo = open(_path, 'a')
-    arquivo.write(f'{name};{email};{phone}\n')
+    arquivo.write(string)
     arquivo.close()
 
 def get_seller() -> list:
