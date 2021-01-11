@@ -4,8 +4,8 @@ _path = 'database/seller_database.txt'
 
 def create_seller(seller) -> list:
     name = seller.get('full_name')
-    email = seller.get('email')
-    phone = seller.get('contact')
+    email = seller.get('seller_email')
+    phone = seller.get('contact_number')
     string = '{' + f"'full_name': '{name}', 'contact': '{email}', 'email': '{phone}'" + '}\n'
     arquivo = open(_path, 'a')
     arquivo.write(string)
