@@ -1,30 +1,28 @@
 import psycopg2
-
-_host = 'pgsql08-farm15.uni5.net'
-_user = 'topskills3'
-_password = 'olist21'
-_database = 'topskills3'
-_connection_string = f'host={_host} user={_user} dbname={_database} password={_password}'
+from .log_controller import write_log
+from .connection import db_connection
 
 def create_marketplace(name, description)-> None:
-    conn = psycopg2.connect(_connection_string)
-    cur = conn.cursor()
-    cur.execute(f"INSERT INTO marketplace (name, description) values('{name}', '{description}');")
-    conn.commit()
-    cur.close()
-    conn.close()
+    db = db_connection()
+    cursor = db.cursor()
+    cursor.execute(f"INSERT INTO marketplace (name, description) values('{name}', '{description}');")
+    db.commit()
+    cursor.close()
+    db.close()
+    write_log(action="create",type="marketplace")
 
 def get_marketplaces() -> None:
-        list_marketplaces = []
-        conn = psycopg2.connect(_connection_string)
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM marketplace")
-        marketplaces = cursor.fetchall()
-        for marketplace in marketplaces:
-            result = {'name': marketplace[1],
-                'description': marketplace[2]
-                }
-            list_marketplaces.append(result)
-        cursor.close()
-        conn.close()
-        return list_marketplaces
+    list_marketplaces = []
+    db = db_connection()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM marketplace")
+    marketplaces = cursor.fetchall()
+    for marketplace in marketplaces:
+        result = {'name': marketplace[1],
+            'description': marketplace[2]
+            }
+        list_marketplaces.append(result)
+    cursor.close()
+    db.close()
+    write_log(action='list', type='marketplace')
+    return list_marketplaces
