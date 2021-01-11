@@ -1,31 +1,19 @@
-from flask import Flask, render_template, request
-
 import sys
+sys.path.append('backend/controller')
 
+from flask import Flask, render_template, request
 from werkzeug.utils import redirect
-#sys.path.append('f:\projetos\olistprojetos\marketplacesduplas\marketplace-dupla')
-#sys.path.append('/home/victor/Documents/marketplace-dupla')
-#sys.path.append('/home/quesia/marketplace-dupla')
-sys.path.append('.')
-
-from backend.controller import Controller
-from backend.log import write_log
+from log import write_log
+from marketplace import create_marketplace, get_marketplaces
+from product import create_product, get_product
+from log import write_log, get_log
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-seller_controller = Controller("database/seller_database.txt")
-marketplace_controller = Controller("database/marketplace_database.txt")
-product_controller = Controller("database/product_database.txt")
-categories_controller = Controller("database/categories_database.txt")
-log_controller = Controller("log.txt")
-lista_produtos = product_controller.get_product()
-lista_categories = categories_controller.get_categories()
-
 
 @app.route('/')
 def index():
     return render_template('base_template.html')
-
 
 @app.route('/marketplaces')
 def marketplaces():
@@ -67,7 +55,6 @@ def listar_produtos():
     write_log(action="list",type="products")
     return render_template('list_product.html', produtos = lista_produtos)
 
-
 @app.route('/categories')
 def cadastrar_categorias():
     if request.args:
@@ -85,8 +72,6 @@ def listar_categories():
     lista_categorias = categories_controller.get_categories()
     write_log(action="list", type="categories")
     return render_template('list_categories.html', lista = lista_categorias)
-
-
 
 @app.route('/sellers')
 def sellers():
