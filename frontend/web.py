@@ -6,8 +6,8 @@ from werkzeug.utils import redirect
 from backend.controller.marketplace_controller import creating_marketplace, list_marketplaces
 from backend.controller.product_controller import creating_product, list_products
 from backend.controller.log_controller import write_log, get_log
-from backend.controller.seller_controller import list_sellers, creating_seller
-from backend.controller.category_controller import list_categories, creating_category
+from backend.controller.seller_controller import list_sellers, creating_seller, create_seller_db, list_sellers_db
+from backend.controller.category_controller import list_categories, creating_category, list_categories_db, create_category_db
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -53,14 +53,15 @@ def listar_produtos():
 def cadastrar_categorias():
     if request.method == 'POST':
         data = request.form
-        creating_category(data)
+        create_category_db(data)
+        #creating_category(data)
         write_log(action="create", type="category")
         redirect("/")
     return render_template('create_categories.html')
 
 @app.route('/list_categories')
 def listar_categories():
-    lista_categorias = list_categories()
+    lista_categorias = list_categories_db() #list_categories()
     write_log(action="list", type="categories")
     return render_template('list_categories.html', lista = lista_categorias)
 
@@ -68,13 +69,14 @@ def listar_categories():
 def sellers():
     if request.method == 'POST':
         data = request.form
-        creating_seller(data)
+        create_seller_db(data)
+        #creating_seller(data)
         write_log(action='register', type='seller')
     return render_template('create_seller.html')
 
 @app.route('/list_sellers')
 def list_seller():
-    sellers_list = list_sellers()
+    sellers_list = list_sellers_db() #list_sellers()
     write_log(action="list",type="sellers")
     return render_template('list_seller.html', sellers = sellers_list)
 
