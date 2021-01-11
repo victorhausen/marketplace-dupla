@@ -2,14 +2,14 @@
 
 {% block content %}
     <h3>Create Marketplace</h3>
-    <form action="/marketplaces" method="GET">
+    <form action="/marketplaces" method="POST">
         <ul>
             <li>
-                <input type="text" id="name_input" name="name">
+                <input type="text" id="name_input" name="name_input">
                 <label for="name_input">Name</label>
             </li>
             <li>
-                <input type="text" id="description_input" name="description">
+                <input type="text" id="description_input" name="description_input">
                 <label for="description_input">Description</label>
             </li>
             <li>

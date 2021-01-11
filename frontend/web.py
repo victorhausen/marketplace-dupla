@@ -14,14 +14,12 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def index():
     return render_template('base_template.html')
 
-@app.route('/marketplaces')
+@app.route('/marketplaces', methods=['GET', 'POST'])
 def marketplaces():
-    if request.args:
-        data = {
-            "name": request.args["name"],
-            "description": request.args["description"]
-        }
-        creating_marketplace(data)
+    if request.method == 'POST':
+        name = request.form['name_input']
+        description = request.form['description_input']
+        creating_marketplace(name, description)
         write_log(action="create",type="marketplace")
         redirect("/")
     return render_template('create_marketplace.html')
@@ -32,15 +30,13 @@ def listar_marketplace():
     write_log(action='list', type='marketplace')
     return render_template('list_marketplace.html', listar = lista_marketplace)
 
-@app.route('/products')
+@app.route('/products', methods=['GET', 'POST'])
 def products():
-    if request.args:
-        data = {
-            "name": request.args["name"],
-            "description": request.args["description"],
-            "price":request.args["price"]
-        }
-        creating_product(data)
+    if request.method == 'POST':
+        name = request.form['name_input']
+        description = request.form['description_input']
+        price = request.form['price_input']
+        creating_product(name, description, price)
         write_log(action="create",type="product")
         redirect("/")
     return render_template('create_product.html')
