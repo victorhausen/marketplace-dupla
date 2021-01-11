@@ -2,20 +2,20 @@
 
 {% block content %}
     <h3>Create Product</h3>
-    <form action="/products" method="GET">
+    <form action="/products" method="POST">
         <ul>
             <li>
                 <label for="name_input">Name</label>
-                <input type="text" id="name_input" name="name">               
+                <input type="text" id="name_input" name="name_input">               
             </li>
 
             <li>
                 <label for="description_input">Description</label>
-                <input type="text" id="description_input" name="description">               
+                <input type="text" id="description_input" name="description_input">               
             </li>
             <li>
                 <label for="price_input">Price</label>
-                <input type="text" id="price_input" name="price">
+                <input type="text" id="price_input" name="price_input">
             </li>
             <li>
                 <input type="submit" id="submit" name="submit">
