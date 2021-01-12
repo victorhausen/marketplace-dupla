@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fbe2e3c-33b6-4255-acb4-bc4b6575dc0b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/controller/category_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/category_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controller/log_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/log_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dao_db/category_dao_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dao_db/category_dao_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dao_db/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dao_db/connection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dao_db/log_dao_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dao_db/log_dao_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dao_db/marketplace_dao_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dao_db/marketplace_dao_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dao_db/product_dao_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dao_db/product_dao_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/list_categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/list_categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/list_product.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/list_product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/web.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/web.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
