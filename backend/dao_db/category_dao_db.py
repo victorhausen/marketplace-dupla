@@ -1,6 +1,7 @@
 from .connection import db_connection
+from ..controller.log_controller import write_log
 
-def create_category_db(category) -> None:
+def create_category(category) -> None:
     db = db_connection()
     cursor = db.cursor()
     name = category.get('name')
@@ -10,8 +11,9 @@ def create_category_db(category) -> None:
     db.commit()
     cursor.close()
     db.close()
+    write_log(action='create', type='category')
 
-def get_categories_db() -> list:
+def get_categories() -> list:
     categories = []
     db = db_connection()
     cursor = db.cursor()
@@ -27,4 +29,5 @@ def get_categories_db() -> list:
 
     cursor.close()
     db.close()
+    write_log(action='list', type='category')
     return categories;

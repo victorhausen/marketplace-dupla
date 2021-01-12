@@ -1,2 +1,4 @@
 {'full_name': 'Marcello Santana', 'contact': '81129440', 'email': 'marcellosantana@live.com'}
 {'full_name': 'santana', 'contact': '81129440', 'email': 'aa'}
+{'full_name': 'Clara', 'contact': 'daishda@gidfj.com', 'email': '(41) 2839-4234'}
+{'full_name': 'Clara', 'contact': 'daishda@gidfj.com', 'email': '(41) 2839-4234'}
