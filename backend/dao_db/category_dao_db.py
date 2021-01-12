@@ -1,5 +1,8 @@
-from .connection import db_connection
-from ..controller.log_controller import write_log
+import sys
+sys.path.append('.')
+
+from backend.dao_db.connection import db_connection
+from backend.controller.log_controller import write_log
 
 def create_category(category) -> None:
     db = db_connection()

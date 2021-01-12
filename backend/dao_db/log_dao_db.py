@@ -1,7 +1,8 @@
-import psycopg2
+import sys
+sys.path.append('.')
+
 from datetime import datetime
-from .log_controller import write_log
-from .connection import db_connection
+from backend.dao_db.connection import db_connection
 
 def current_date() -> str:
     data_atual = datetime.now()
@@ -31,5 +32,4 @@ def list_logs() -> list:
         lista_logs.append(result)
     cursor.close()
     db.close()
-    write_log(action="list",type="log")
     return lista_logs
