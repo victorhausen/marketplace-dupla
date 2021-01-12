@@ -1,4 +1,5 @@
-from ..dao_txt.category_dao_txt import get_categories, create_category
+#from ..dao_txt.category_dao_txt import get_categories, create_category
+from ..dao_db.category_dao_db import get_categories, create_category
 from .log_controller import write_log, get_log
 
 def creating_category(category) -> None:
