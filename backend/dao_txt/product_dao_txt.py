@@ -9,7 +9,7 @@ def create_product(name, description, price)-> None:
             file_.write(product)
         write_log(action="create",type="product")
 
-def get_products()-> None:
+def get_products()-> list:
     lista_products = []
     with open(_product_path, 'r') as file_:
         for a in file_:

@@ -11,7 +11,7 @@ def create_marketplace(name, description)-> None:
     db.close()
     write_log(action="create",type="marketplace")
 
-def get_marketplaces() -> None:
+def get_marketplaces() -> list:
     list_marketplaces = []
     db = db_connection()
     cursor = db.cursor()

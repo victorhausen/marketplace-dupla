@@ -9,7 +9,7 @@ def create_marketplace(name, description)-> None:
             file_.write(marketplace)
         write_log(action="create",type="marketplace")
 
-def get_marketplaces() -> None:
+def get_marketplaces() -> list:
     list_marketplaces = []
     with open(_marketplace_path, 'r') as file_:
         for a in file_:

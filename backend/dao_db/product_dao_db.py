@@ -11,7 +11,7 @@ def create_product(name, description, price)-> None:
     db.close()
     write_log(action="create",type="product")
 
-def get_products() -> None:
+def get_products() -> list:
     lista_products = []
     db = db_connection()
     cursor = db.cursor()

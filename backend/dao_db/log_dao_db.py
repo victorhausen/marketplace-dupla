@@ -3,7 +3,7 @@ from datetime import datetime
 from .log_controller import write_log
 from .connection import db_connection
 
-def current_date():
+def current_date() -> str:
     data_atual = datetime.now()
     data_completa = data_atual.strftime("%d/%m/%Y %H:%M:%S")
     return data_completa
@@ -16,7 +16,7 @@ def generate_log(action, type_)-> None:
     cursor.close()
     db.close()
 
-def list_logs() -> None:
+def list_logs() -> list:
     lista_logs = []
     db = db_connection()
     cursor = db.cursor()

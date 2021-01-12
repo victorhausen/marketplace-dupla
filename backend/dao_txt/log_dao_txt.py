@@ -4,7 +4,7 @@ from .log_controller import write_log
 
 _log_path = "database/log_database.txt"
 
-def current_date():
+def current_date() -> str:
     data_atual = datetime.now()
     data_completa = data_atual.strftime("%d/%m/%Y %H:%M:%S")
     return data_completa
@@ -18,7 +18,7 @@ def generate_log(action, type):
         }
         file_.write(str(data)+"\n")
 
-def list_logs()-> None:
+def list_logs()-> list:
     lista_log = []
     with open(_log_path, 'r') as file_:
         for a in file_:
