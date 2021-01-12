@@ -1,6 +1,8 @@
-import psycopg2
+import sys
+sys.path.append('.')
+
 from backend.controller.log_controller import write_log
-from .connection import db_connection
+from backend.dao_db.connection import db_connection
 
 def create_product(name, description, price)-> None:
     db = db_connection()

@@ -1,6 +1,8 @@
-import psycopg2
-from .log_controller import write_log
-from .connection import db_connection
+import sys
+sys.path.append('.')
+
+from backend.controller.log_controller import write_log
+from backend.dao_db.connection import db_connection
 
 def create_marketplace(name, description)-> None:
     db = db_connection()
