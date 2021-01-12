@@ -7,7 +7,8 @@ from backend.controller.marketplace_controller import creating_marketplace, list
 from backend.controller.product_controller import creating_product, list_products
 from backend.controller.log_controller import write_log, get_log
 from backend.controller.seller_controller import list_sellers, creating_seller, create_seller_db, list_sellers_db
-from backend.controller.category_controller import list_categories, creating_category, list_categories_db, create_category_db
+#from backend.controller.category_controller import list_categories, creating_category, list_categories, create_category
+from backend.controller.category_controller import list_categories, create_category
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
