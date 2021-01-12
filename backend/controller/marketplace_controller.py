@@ -1,8 +1,8 @@
-from ..dao_txt.marketplace_dao_txt import create_marketplace, get_marketplaces
+from ..dao_db.marketplace_dao_db import create_marketplace, get_marketplaces
 
 def creating_marketplace(name, description)-> None:
         create_marketplace(name, description)
 
-def list_marketplaces() -> None:
+def list_marketplaces() -> list:
         marketplaces = get_marketplaces()
         return marketplaces

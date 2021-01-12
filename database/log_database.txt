@@ -1,24 +1,8 @@
-{'action': 'create', 'type': 'marketplace'}
-{'action': 'create', 'type': 'marketplace'}
-{'action': 'create', 'type': 'product'}
-{'action': 'create', 'type': 'product'}
-{'action': 'list', 'type': 'products'}
-{'action': 'list', 'type': 'log'}
-{'action': 'list', 'type': 'log'}
-{'action': 'list', 'type': 'marketplace'}
-{'action': 'list', 'type': 'log'}
-{'action': 'list', 'type': 'log'}
-{'action': 'list', 'type': 'log'}
-{'action': 'list', 'type': 'marketplace'}
-{'action': 'list', 'type': 'marketplace'}
-{'action': 'list', 'type': 'products'}
-{'action': 'list', 'type': 'log'}
-{'action': 'list', 'type': 'marketplace'}
-{'action': 'list', 'type': 'products'}
-{'action': 'list', 'type': 'marketplace'}
-{'action': 'list', 'type': 'products'}
-{'action': 'create', 'type': 'product'}
-{'action': 'create', 'type': 'marketplace'}
-{'action': 'list', 'type': 'marketplace'}
-{'action': 'list', 'type': 'products'}
-{'action': 'list', 'type': 'log'}
+{'date': '11/01/2021 15:13:09', 'action': 'list', 'type': 'marketplace'}
+{'date': '11/01/2021 15:13:11', 'action': 'list', 'type': 'products'}
+{'date': '11/01/2021 15:13:12', 'action': 'list', 'type': 'log'}
+{'date': '11/01/2021 15:13:31', 'action': 'list', 'type': 'log'}
+{'date': '11/01/2021 15:14:34', 'action': 'list', 'type': 'log'}
+{'date': '11/01/2021 15:14:52', 'action': 'create', 'type': 'marketplace'}
+{'date': '11/01/2021 15:14:53', 'action': 'list', 'type': 'log'}
+{'date': '11/01/2021 15:15:07', 'action': 'list', 'type': 'log'}
