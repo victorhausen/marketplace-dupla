@@ -12,9 +12,9 @@
     <tbody>
         {% for a in sellers%}
         <tr>
-            <td>{{a['full_name']}}</td>
-            <td>{{a['contact']}}</td>
-            <td>{{a['email']}}</td>
+            <td>{{a.name}}</td>
+            <td>{{a.phone}}</td>
+            <td>{{a.email}}</td>
         </tr>
         {% endfor %}
     </tbody>

@@ -3,6 +3,8 @@ sys.path.append('.')
 
 from backend.dao_db.connection import db_connection
 from backend.controller.log_controller import write_log
+from backend.models.log import Log, current_date
+
 
 def create_category(category) -> None:
     db = db_connection()
@@ -14,7 +16,8 @@ def create_category(category) -> None:
     db.commit()
     cursor.close()
     db.close()
-    write_log(action='create', type='category')
+    write_log(Log(current_date(), 'create', 'category'))
+
 
 def get_categories() -> list:
     categories = []
@@ -32,5 +35,5 @@ def get_categories() -> list:
 
     cursor.close()
     db.close()
-    write_log(action='list', type='category')
+    write_log(Log(current_date(), 'list', 'category'))
     return categories;
