@@ -1,15 +1,19 @@
 import psycopg2
 from backend.controller.log_controller import write_log
-from .connection import db_connection
+from backend.dao_db.connection import db_connection
+from backend.models.product import Product
 
-def create_product(name, description, price)-> None:
+
+def create_product(pr: Product) -> None:
     db = db_connection()
     cursor = db.cursor()
-    cursor.execute(f"INSERT INTO product (name, description, price) values('{name}', '{description}', '{price}');")
+    cursor.execute(
+        f"INSERT INTO product (name, description, price) values('{pr.name}', '{pr.description}', {pr.price});")
     db.commit()
     cursor.close()
     db.close()
-    write_log(action="create",type="product")
+    write_log(action="create", type="product")
+
 
 def get_products() -> list:
     lista_products = []
@@ -18,12 +22,9 @@ def get_products() -> list:
     cursor.execute("SELECT * FROM product")
     products = cursor.fetchall()
     for product in products:
-        result = {'name': product[1],
-            'description': product[2],
-            'price': product[3]
-            }
+        result = Product(product[1], product[2], product[3], product[0])
         lista_products.append(result)
     cursor.close()
     db.close()
-    write_log(action="list",type="products")
+    write_log(action="list", type="products")
     return lista_products
