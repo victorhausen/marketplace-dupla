@@ -1,5 +1,6 @@
 import psycopg2
 
+
 def db_connection():
     host = 'pgsql08-farm15.uni5.net'
     user = 'topskills3'

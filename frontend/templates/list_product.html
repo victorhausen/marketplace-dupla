@@ -10,11 +10,11 @@
     </tr>
     </thead>
     <tbody>
-        {% for a in produtos%}
+        {% for a in produtos %}
     <tr>
-        <td>{{a['name']}}</td>
-        <td>{{a['description']}}</td>
-        <td>{{a['price']}}</td>
+        <td>{{ a.name }}</td>
+        <td>{{ a.description }}</td>
+        <td>{{ a.price }}</td>
     </tr>
         {% endfor %}
     </tbody>

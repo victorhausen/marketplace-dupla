@@ -9,6 +9,8 @@ from backend.controller.product_controller import creating_product, list_product
 from backend.controller.seller_controller import list_sellers, creating_seller
 from backend.controller.log_controller import get_log
 from backend.controller.category_controller import list_categories, creating_category
+from backend.models.product import Product
+from backend.models.category import Category
 from backend.models.marketplace import Marketplace
 from backend.models.seller import Seller
 
@@ -39,10 +41,8 @@ def listar_marketplace():
 @app.route('/products', methods=['GET', 'POST'])
 def products():
     if request.method == 'POST':
-        name = request.form['name_input']
-        description = request.form['description_input']
-        price = request.form['price_input']
-        creating_product(name, description, price)
+        pr = Product(request.form['name_input'], request.form['description_input'], request.form['price_input'])
+        creating_product(pr)
         redirect("/")
     return render_template('create_product.html')
 
@@ -56,8 +56,8 @@ def listar_produtos():
 @app.route('/categories', methods=['GET', 'POST'])
 def cadastrar_categorias():
     if request.method == 'POST':
-        data = request.form
-        creating_category(data)
+        ca = Category(request.form['name'], request.form['description'])
+        creating_category(ca)
         redirect("/")
     return render_template('create_categories.html')
 
