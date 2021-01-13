@@ -3,6 +3,7 @@ from backend.controller.log_controller import write_log
 from backend.models.category import Category
 
 
+
 def create_category(ca: Category) -> None:
     db = db_connection()
     cursor = db.cursor()
@@ -13,7 +14,8 @@ def create_category(ca: Category) -> None:
     db.commit()
     cursor.close()
     db.close()
-    write_log(action='create', type='category')
+    write_log(Log(current_date(), 'create', 'category'))
+
 
 
 def get_categories() -> list:
@@ -29,5 +31,6 @@ def get_categories() -> list:
 
     cursor.close()
     db.close()
-    write_log(action='list', type='category')
+
+    write_log(Log(current_date(), 'list', 'category'))
     return categories

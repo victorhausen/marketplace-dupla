@@ -1,4 +1,7 @@
-import psycopg2
+import sys
+
+sys.path.append('.')
+
 from backend.controller.log_controller import write_log
 from backend.dao_db.connection import db_connection
 from backend.models.product import Product
@@ -12,7 +15,7 @@ def create_product(pr: Product) -> None:
     db.commit()
     cursor.close()
     db.close()
-    write_log(action="create", type="product")
+    write_log(Log(current_date(), 'create', 'product'))
 
 
 def get_products() -> list:
@@ -26,5 +29,5 @@ def get_products() -> list:
         lista_products.append(result)
     cursor.close()
     db.close()
-    write_log(action="list", type="products")
+    write_log(Log(current_date(), 'list', 'product'))
     return lista_products

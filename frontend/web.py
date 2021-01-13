@@ -11,6 +11,8 @@ from backend.controller.log_controller import get_log
 from backend.controller.category_controller import list_categories, creating_category
 from backend.models.product import Product
 from backend.models.category import Category
+from backend.models.marketplace import Marketplace
+from backend.models.seller import Seller
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -24,9 +26,8 @@ def index():
 @app.route('/marketplaces', methods=['GET', 'POST'])
 def marketplaces():
     if request.method == 'POST':
-        name = request.form['name_input']
-        description = request.form['description_input']
-        creating_marketplace(name, description)
+        mp = Marketplace(request.form['name_input'], request.form['description_input'])
+        creating_marketplace(mp)
         redirect("/")
     return render_template('create_marketplace.html')
 
@@ -70,8 +71,9 @@ def listar_categories():
 @app.route('/sellers', methods=['GET', 'POST'])
 def sellers():
     if request.method == 'POST':
-        data = request.form
+        data = Seller(request.form['full_name'], request.form['contact_number'], request.form['seller_email'])
         creating_seller(data)
+        redirect("/")
     return render_template('create_seller.html')
 
 

@@ -13,14 +13,14 @@
     <tbody>
     {% for i in log %}
         <tr>
-            <td>{{i['date']}}</td>
-            {% if i['action'] == 'list' %}
-            <td style="background-color:red">{{i['action']}}</td>
+            <td>{{i.date}}</td>
+            {% if i.action == 'list' %}
+            <td style="background-color:red">{{i.action}}</td>
             {% endif %}
-            {% if i['action'] == 'create' %}
-            <td style="background-color:blue">{{i['action']}}</td>
+            {% if i.action == 'create' %}
+            <td style="background-color:blue">{{i.action}}</td>
             {% endif %}
-            <td>{{i['type']}}</td>
+            <td>{{i.type_}}</td>
         </tr>
     {% endfor %}
     </tbody>

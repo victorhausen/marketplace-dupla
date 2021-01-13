@@ -1,36 +1,36 @@
-from .connection import db_connection
-from ..controller.log_controller import write_log
+import sys
 
-def create_seller(seller) -> None:
+sys.path.append('.')
+
+from backend.dao_db.connection import db_connection
+from backend.controller.log_controller import write_log
+from backend.models.seller import Seller
+from backend.models.log import Log, current_date
+
+
+def create_seller(seller: Seller) -> None:
     db = db_connection()
     cursor = db.cursor()
-    name = seller.get('full_name')
-    email = seller.get('seller_email')
-    phone = seller.get('contact_number')
-    values = (name, email, phone)
-    cursor.execute("INSERT INTO seller(name, email, phone) values(%s, %s, %s);", values)
-
+    cursor.execute(f"INSERT INTO seller(name, email, phone) values('{seller.name}','{seller.email}','{seller.phone}');")
     db.commit()
     cursor.close()
     db.close()
-    write_log(action='create', type='seller')
+    write_log(Log(current_date(), 'create', 'seller'))
+
 
 def get_sellers() -> list:
     sellers = []
     db = db_connection()
     cursor = db.cursor()
-    cursor.execute("SELECT name, email, phone FROM seller;")
+    cursor.execute("SELECT name, email, phone, id FROM seller;")
     list_sellers = cursor.fetchall()
 
-    for tupla in list_sellers:
-        seller = {
-            'full_name': tupla[0],
-            'contact': tupla[1],
-            'email': tupla[2]
-        }
-        sellers.append(seller)
+    for sel in list_sellers:
+        result = Seller(sel[0], sel[2], sel[1])
+        sellers.append(result)
 
     cursor.close()
     db.close()
-    write_log(action='list', type='seller')
+    write_log(Log(current_date(), 'list', 'seller'))
     return sellers;
+
