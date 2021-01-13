@@ -1,21 +1,19 @@
 import sys
+
 sys.path.append('.')
 
-from datetime import datetime
 from backend.dao_db.connection import db_connection
+from backend.models.log import Log
 
-def current_date() -> str:
-    data_atual = datetime.now()
-    data_completa = data_atual.strftime("%d/%m/%Y %H:%M:%S")
-    return data_completa
 
-def generate_log(action, type_)-> None:
+def generate_log(log: Log) -> None:
     db = db_connection()
     cursor = db.cursor()
-    cursor.execute(f"INSERT INTO log (date, description) values('{current_date()}', '{action} {type_}');")
+    cursor.execute(f"INSERT INTO log (date, description) values('{log.date}', '{log.action} {log.type_}');")
     db.commit()
     cursor.close()
     db.close()
+
 
 def list_logs() -> list:
     lista_logs = []
@@ -25,10 +23,7 @@ def list_logs() -> list:
     logs = cursor.fetchall()
     for log in logs:
         description = log[2].split(' ')
-        result = {'date': log[1],
-            'action': description[0],
-            'type': description[1]
-            }
+        result = Log(log[1], description[0], description[1])
         lista_logs.append(result)
     cursor.close()
     db.close()
