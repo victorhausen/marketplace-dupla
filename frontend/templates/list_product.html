@@ -7,14 +7,25 @@
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
         {% for a in produtos %}
     <tr>
+        <td style="display: none;">{{ a.id }}</td>
         <td>{{ a.name }}</td>
         <td>{{ a.description }}</td>
         <td>{{ a.price }}</td>
+        <td>
+            <button style="background-color: #2962ff; color: white; border: none; border-radius: 8px; padding: 8px;"
+            onclick="location.href='/update_products/{{ a.id }}'" type="button">Update</button>
+        </td>
+        <td>
+            <button style="background-color: #2962ff; color: white; border: none; border-radius: 8px; padding: 8px;"
+            onclick="location.href='/delete_products/{{ a.id }}'" type="button">Delete</button>
+        </td>
     </tr>
         {% endfor %}
     </tbody>

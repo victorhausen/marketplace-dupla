@@ -1,24 +1,28 @@
 {% extends "base_template.html" %}
 
 {% block content %}
-    <h3>Create Product</h3>
-    <form action="/products" method="POST">
+    <h3>{{action}} Product</h3>
+    <form action="/products/{{action}}" method="POST">
         <ul>
+            <li style="display: none;">
+                <label for="id_input">ID</label>
+                <input type="text" id="id_input" name="id_input" value="{{produtos.id}}" />
+            </li>
             <li>
                 <label for="name_input">Name</label>
-                <input type="text" id="name_input" name="name_input">               
+                <input type="text" id="name_input" name="name_input" value="{{produtos.name}}" />
             </li>
 
             <li>
                 <label for="description_input">Description</label>
-                <input type="text" id="description_input" name="description_input">               
+                <input type="text" id="description_input" name="description_input" value="{{produtos.description}}" />
             </li>
             <li>
                 <label for="price_input">Price</label>
-                <input type="text" id="price_input" name="price_input">
+                <input type="text" id="price_input" name="price_input" value="{{produtos.price}}" />
             </li>
             <li>
-                <input type="submit" id="submit" name="submit">
+                <input type="submit" id="submit" name="submit" />
             </li>
         </ul>
     </form>

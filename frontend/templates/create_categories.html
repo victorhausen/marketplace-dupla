@@ -1,19 +1,23 @@
 {% extends "base_template.html" %}
 
 {% block content %}
-    <h3>Create Category</h3>
-    <form action="/categories" method="POST">
+    <h3>{{action}} Category</h3>
+    <form action="/categories/{{action}}" method="POST">
         <ul>
+            <li style="display: none;">
+                <label for="id_input">ID</label>
+                <input type="text" id="id_input" name="id_input" value="{{categorias.id}}"/>
+            </li>
             <li>
-                <input type="text" id="name_input" name="name">
                 <label for="name_input">Name</label>
+                <input type="text" id="name_input" name="name" value="{{categorias.name}}"/>
             </li>
             <li>
-                <input type="text" id="description_input" name="description">
                 <label for="description_input">Description</label>
+                <input type="text" id="description_input" name="description" value="{{categorias.description}}"/>
             </li>
             <li>
-                <input type="submit" id="submit" name="submit">
+                <input type="submit" id="submit" name="submit" />
             </li>
         </ul>
     </form>
