@@ -1,15 +1,19 @@
 {% extends "base_template.html" %}
 
 {% block content %}
-    <h3>Create Marketplace</h3>
-    <form action="/marketplaces" method="POST">
+    <h3>{{action}} Marketplace</h3>
+    <form action="/marketplaces/{{action}}" method="POST">
         <ul>
+            <li style="display:none;">
+                <input type="text" id="id_input" name="id_input" value="{{marketplace.id}}">
+                <label for="id_input">Id</label>
+            </li>
             <li>
-                <input type="text" id="name_input" name="name_input">
+                <input type="text" id="name_input" name="name_input" value="{{marketplace.name}}">
                 <label for="name_input">Name</label>
             </li>
             <li>
-                <input type="text" id="description_input" name="description_input">
+                <input type="text" id="description_input" name="description_input" value="{{marketplace.description}}">
                 <label for="description_input">Description</label>
             </li>
             <li>

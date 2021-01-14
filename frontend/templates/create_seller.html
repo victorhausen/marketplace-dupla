@@ -1,20 +1,24 @@
 {% extends "base_template.html" %}
 
 {% block content %}
-    <h3>Register Seller</h3>
-    <form action="/sellers" method="POST">
+    <h3>{{action}} Seller</h3>
+    <form action="/sellers/{{action}}" method="POST">
         <ul>
+            <li style="display:none;">
+                <input type="text" id="id_input" name="id_input" value="{{seller.id}}">
+                <label for="id_input">Id</label>
+            </li>
             <li>
                 <label for="name_input">Full name</label>
-                <input type="text" id="name_input" name="full_name">
+                <input type="text" id="name_input" name="name_input" value="{{seller.name}}">
             </li>
             <li>
                 <label for="contact_input">Contact number</label>
-                <input type="text" id="description_input" name="contact_number">
+                <input type="text" id="contact_input" name="contact_input" value="{{seller.phone}}">
             </li>
             <li>
                 <label for="email_input">Email</label>
-                <input type="text" id="description_input" name="seller_email">
+                <input type="text" id="email_input" name="email_input" value="{{seller.email}}">
             </li>
             <li>
                 <input type="submit" id="submit" name="submit">

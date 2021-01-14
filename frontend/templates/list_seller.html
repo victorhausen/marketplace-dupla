@@ -4,17 +4,29 @@
 <table border="1">
     <thead>
         <tr>
+            <th style="display:none;">Id: </th>
             <th>Name</th>
             <th>Contact number</th>
             <th>email</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         {% for a in sellers%}
         <tr>
+            <td  style="display:none;">{{a.id}}</td>
             <td>{{a.name}}</td>
             <td>{{a.phone}}</td>
             <td>{{a.email}}</td>
+            <td>
+            <button style="background-color: #2962FF; color: white; border: none; padding: 8px; border-radius: 8px;"
+                    onclick="location.href='/update_seller/{{a.id}}'" type="button">Update</button>
+            </td>
+            <td>
+                <button style="background-color: #2962FF; color: white; border: none; padding: 8px; border-radius: 8px;"
+                        onclick="location.href='/delete_seller/{{a.id}}'" type="button">Delete</button>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
