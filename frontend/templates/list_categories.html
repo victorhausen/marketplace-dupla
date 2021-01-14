@@ -7,13 +7,24 @@
     </tr>
         <th>Name: </th>
         <th>Description: </th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     {% for i in lista %}
     <tr>
+        <td style="display: none;">{{ i.id }}</td>
         <td>{{ i.name }}</td>
         <td>{{ i.description }}</td>
+        <td>
+            <button style="background-color: #2962ff; color: white; border: none; border-radius: 8px; padding: 8px;"
+            onclick="location.href='/update_categories/{{ i.id }}'" type="button">Update</button>
+        </td>
+        <td>
+            <button style="background-color: #2962ff; color: white; border: none; border-radius: 8px; padding: 8px;"
+            onclick="location.href='/delete_categories/{{ i.id }}'" type="button">Delete</button>
+        </td>
     </tr>
     {% endfor %}
     </tbody>
