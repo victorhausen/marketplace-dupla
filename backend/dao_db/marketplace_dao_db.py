@@ -1,55 +1,56 @@
-from backend.dao_db.connection import db_connection
+from backend.dao_db.connection import Connection
 from backend.models.marketplace import Marketplace
 
 
-def create_marketplace(mp: Marketplace) -> None:
-    with db_connection() as db:
-        cursor = db.cursor()
-        cursor.execute(f"INSERT INTO marketplace (name, description) values('{mp.name}', '{mp.description}');")
-    db.commit()
+def create_marketplace(marketplace: Marketplace) -> None:
+    with Connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute(f"""
+                        INSERT INTO marketplace 
+                        (name, description) 
+                        values('{marketplace.name}', '{marketplace.description}');""")
+    conn.commit()
 
 
 def read_marketplaces() -> list:
     list_marketplaces = []
-    with db_connection() as db:
-        cursor = db.cursor()
+    with Connection() as conn:
+        cursor = conn.cursor()
         cursor.execute("SELECT * FROM marketplace")
         marketplaces = cursor.fetchall()
         for mp in marketplaces:
             result = Marketplace(mp[1], mp[2], mp[0])
             list_marketplaces.append(result)
+
     return list_marketplaces
 
 
-def update_marketplace(mp: Marketplace) -> None:
-    with db_connection() as db:
-        cursor = db.cursor()
-        cursor.execute(
-            f"""
-                update marketplace 
-                set name='{mp.name}', description='{mp.description}'
-                where id={mp.id};
-            """
-        )
-    db.commit()
+def update_marketplace(marketplace: Marketplace) -> None:
+    with Connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute(f"""
+                        UPDATE marketplace 
+                        SET name='{marketplace.name}', description='{marketplace.description}'
+                        WHERE id={marketplace.id};
+                        """)
+    conn.commit()
 
 
 def delete_marketplace(id: int) -> None:
-    with db_connection() as db:
-        cursor = db.cursor()
-        cursor.execute(
-            f"""
-                delete from marketplace
-                where id={id};
-            """
-        )
-    db.commit()
+    with Connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute(f"""
+                        DELETE FROM marketplace
+                        WHERE id={id};
+                        """)
+    conn.commit()
 
 
 def read_marketplace_by_id(id: int) -> Marketplace:
-    with db_connection() as db:
-        cursor = db.cursor()
+    with Connection() as conn:
+        cursor = conn.cursor()
         cursor.execute(f"SELECT * FROM marketplace where id ={id}")
         marketplace = cursor.fetchall()
-        mp = Marketplace(marketplace[0][1], marketplace[0][2], marketplace[0][0])
-    return mp
+        results = Marketplace(marketplace[0][1], marketplace[0][2], marketplace[0][0])
+
+    return results
