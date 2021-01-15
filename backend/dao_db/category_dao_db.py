@@ -1,58 +1,43 @@
-from backend.dao_db.connection import Connection
 from backend.models.category import Category
+from backend.dao_db.base_dao import BaseDao
 
 
-def create_category(category: Category) -> None:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        INSERT INTO category 
-                        (name, description) 
-                        values('{category.name}', '{category.description}');
-                        """)
-        conn.commit()
+class CategoryDao(BaseDao):
+    def create(self, category: Category) -> None:
+        query = f"""
+                INSERT INTO category 
+                (name, description) 
+                values
+                ('{category.name}', '{category.description}');
+                """
+        super().execute(query)
 
-
-def read_categories() -> list:
-    categories = []
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM category;")
-        list_categories = cursor.fetchall()
+    def read_all(self) -> list:
+        categories = []
+        query = "SELECT name, description, id FROM category;"
+        list_categories = super().read(query)
         for category in list_categories:
-            result = Category(category[1], category[2], category[0])
+            result = Category(category[0], category[1], category[2])
             categories.append(result)
+        return categories
 
-    return categories
+    def update(self, category: Category) -> None:
+        query = f"""
+                UPDATE category
+                SET name='{category.name}', description='{category.description}'
+                WHERE id={category.id};
+                """
+        super().execute(query)
 
+    def delete(self, id: int) -> None:
+        query = f"""
+                DELETE FROM category
+                WHERE id={id};
+                """
+        super().execute(query)
 
-def update_categories(category: Category):
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        UPDATE category
-                        SET name='{category.name}', description='{category.description}'
-                        WHERE id={category.id};
-                        """)
-        conn.commit()
-
-
-def delete_categories(id: int):
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        DELETE FROM category
-                        WHERE id={id};
-                        """)
-        conn.commit()
-
-
-def read_categories_by_id(id: int) -> Category:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM category WHERE id={id};")
-        categories = cursor.fetchall()
-
-        results = Category(categories[0][1], categories[0][2], categories[0][0])
-
-    return results
+    def read_by_id(self, id: int) -> Category:
+        query = f"SELECT name, description, id  FROM category WHERE id={id};"
+        categories = super().read(query)[0]
+        results = Category(categories[0], categories[1], categories[2])
+        return results

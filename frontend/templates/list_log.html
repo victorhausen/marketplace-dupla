@@ -14,7 +14,7 @@
     {% for i in log %}
         <tr>
             <td>{{i.date}}</td>
-            {% if i.action == 'read' %}
+            {% if i.action == 'read_all' or i.action == 'read_by_id' %}
             <td style="background-color:red">{{i.action}}</td>
             {% endif %}
             {% if i.action == 'create' %}

@@ -1,29 +1,27 @@
-from backend.dao_db.connection import Connection
-from backend.models.log import Log, format_date_to_print
+from backend.models.log import Log
+from backend.dao_db.base_dao import BaseDao
 
 
-def create_log(log: Log) -> None:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        INSERT INTO log 
-                        (date, description) 
-                        values('{log.date}', '{log.action} {log.type_}');
-                        """)
-        conn.commit()
+class LogDao(BaseDao):
+    def create(self, log: Log) -> None:
+        query = f"""
+                INSERT INTO log 
+                (date, description) 
+                values('{log.date.strftime("%m/%d/%Y %H:%M:%S")}', '{log.action} {log.type_}');
+                """
+        super().execute(query)
 
-
-def read_logs() -> list:
-    lista_logs = []
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM log")
-        logs = cursor.fetchall()
+    def read_all(self) -> list:
+        list_logs = []
+        query = "SELECT id, date, description FROM log"
+        logs = super().read(query)
         for log in logs:
             description = log[2].split(' ')
             result = Log(format_date_to_print(log[1]), description[0], description[1])
-            lista_logs.append(result)
+            list_logs.append(result)
+        return list_logs
 
-    return lista_logs
 
-
+def format_date_to_print(date) -> str:
+    date = date.strftime("%d/%m/%Y %H:%M:%S")
+    return date

@@ -1,57 +1,42 @@
-from backend.dao_db.connection import Connection
 from backend.models.seller import Seller
+from backend.dao_db.base_dao import BaseDao
 
 
-def create_seller(seller: Seller) -> None:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        INSERT INTO seller
-                        (name, email, phone) 
-                        values('{seller.name}','{seller.email}','{seller.phone}');
-                        """)
-        conn.commit()
+class SellerDao(BaseDao):
+    def create(self, seller: Seller) -> None:
+        query = f"""
+                INSERT INTO seller
+                (name, email, phone) 
+                values('{seller.name}','{seller.email}','{seller.phone}');
+                """
+        super().execute(query)
 
-
-def read_sellers() -> list:
-    sellers = []
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT name, phone, email,  id FROM seller;")
-        list_sellers = cursor.fetchall()
-        for sel in list_sellers:
+    def read_all(self) -> list:
+        list_sellers = []
+        query = "SELECT name, phone, email,  id FROM seller;"
+        sellers = super().read(query)
+        for sel in sellers:
             result = Seller(sel[0], sel[1], sel[2], sel[3])
-            sellers.append(result)
+            list_sellers.append(result)
+        return list_sellers
 
-    return sellers
+    def update(self, seller: Seller) -> None:
+        query = f"""
+                UPDATE seller 
+                SET name='{seller.name}', email='{seller.email}', phone='{seller.phone}'
+                WHERE id={seller.id};
+                """
+        super().execute(query)
 
+    def delete(self, id: int) -> None:
+        query = f"""
+                DELETE FROM seller
+                WHERE id={id};
+                """
+        super().execute(query)
 
-def update_seller(seller: Seller) -> None:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        UPDATE seller 
-                        SET name='{seller.name}', email='{seller.email}', phone='{seller.phone}'
-                        WHERE id={seller.id};
-                        """)
-    conn.commit()
-
-
-def delete_seller(id: int) -> None:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        DELETE FROM seller
-                        WHERE id={id};
-                        """)
-    conn.commit()
-
-
-def read_seller_by_id(id: int) -> Seller:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT name, phone, email, id FROM seller WHERE id ={id}")
-        seller = cursor.fetchall()
-        results = Seller(seller[0][0], seller[0][1], seller[0][2], seller[0][3])
-
-    return results
+    def read_by_id(self, id: int) -> Seller:
+        query = f"SELECT name, phone, email, id FROM seller WHERE id ={id}"
+        seller = super().read(query)[0]
+        results = Seller(seller[0], seller[1], seller[2], seller[3])
+        return results

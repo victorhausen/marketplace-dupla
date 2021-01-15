@@ -1,60 +1,42 @@
-from backend.dao_db.connection import Connection
 from backend.models.product import Product
+from backend.dao_db.base_dao import BaseDao
 
+class ProductDao(BaseDao):
+    def create(self, product: Product) -> None:
+        query = f"""
+                INSERT INTO product 
+                (name, description, price) 
+                values('{product.name}', '{product.description}', {product.price});
+                """
+        super().execute(query)
 
-def create_product(product: Product) -> None:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        INSERT INTO product 
-                        (name, description, price) 
-                        values('{product.name}', '{product.description}', {product.price});
-                        """)
-        conn.commit()
+    def read_all(self) -> list:
+        list_products = []
+        query = "SELECT name, description, price, id FROM product"
+        products = super().read(query)
+        for prod in products:
+            result = Product(prod[0], prod[1], prod[2], prod[3])
+            list_products.append(result)
+        return list_products
 
+    def update(self, product: Product) -> None:
+        query = f"""
+                UPDATE product 
+                SET name='{product.name}', description='{product.description}', price={product.price} 
+                WHERE id={product.id};
+                """
+        super().execute(query)
 
-def read_products() -> list:
-    lista_products = []
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM product")
-        products = cursor.fetchall()
-        for product in products:
-            result = Product(product[1], product[2], product[3], product[0])
-            lista_products.append(result)
+    def delete(self, id: int) -> None:
+        query = f"""
+                DELETE FROM product
+                WHERE id={id};
+                """
+        super().execute(query)
 
-    return lista_products
-
-
-def update_product(product: Product):
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        UPDATE product 
-                        SET name='{product.name}', description='{product.description}', price={product.price} 
-                        WHERE id={product.id};
-                        """)
-        conn.commit()
-
-
-def delete_product(id: int):
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"""
-                        DELETE FROM product
-                        WHERE id={id};
-                        """)
-        conn.commit()
-
-
-def read_product_by_id(id: int) -> Product:
-    with Connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM product WHERE id={id};")
-        products = cursor.fetchall()
-
-        results = Product(products[0][1], products[0][2], products[0][3], products[0][0])
-
-    return results
-
+    def read_by_id(self, id: int) -> Product:
+        query = f"SELECT name, description, price, id FROM product WHERE id={id};"
+        prod = super().read(query)[0]
+        results = Product(prod[0], prod[1], prod[2].replace("$", ""), prod[3])
+        return results
 
