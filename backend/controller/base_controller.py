@@ -8,8 +8,8 @@ class BaseController:
         self.__model_name = model_name
 
     def create(self, model: object) -> None:
-        self.__log.create(self.__model_name)
         self.__dao.create(model)
+        self.__log.create(self.__model_name)
 
     def read_by_id(self, id: int) -> object:
         model = self.__dao.read_by_id(id)
