@@ -1,3 +1,5 @@
+import sys 
+sys.path.append('.')
 
 from flask import Flask, render_template, request, redirect
 from backend.controller.marketplace_controller import MarketplaceController
@@ -122,16 +124,16 @@ def deletar_categorias(id):
 def cadastrar_sellers(action):
     sel = None
     if request.method == 'POST':
-        if action == 'Create':
+        if action == 'Save':
             data = Seller(request.form['name_input'], request.form['contact_input'], request.form['email_input'])
-            SellerController().create(data)
+            SellerController().save(data)
             return redirect("/")
         elif action == 'Update':
             sel = Seller(request.form['name_input'], request.form['contact_input'], request.form['email_input'],
                          request.form['id_input'])
             SellerController().update(sel)
             return redirect("/list_sellers")
-    return render_template('create_seller.html', seller=sel, action="Create")
+    return render_template('save_seller.html', seller=sel, action="Save")
 
 
 @app.route('/list_sellers')

@@ -1,38 +1,19 @@
-class Seller:
-    def __init__(self, name: str, phone: str, email: str, id: int = None):
-        self.name = name
-        self.phone = phone
-        self.email = email
-        self.id = id
+from sqlalchemy import Column, String
+from backend.models.base_model BaseModel
 
-    @property
-    def name(self) -> str:
-        return self.__name
 
-    @name.setter
-    def name(self, name: str) -> None:
-        self.__name = name
+class Seller(BaseModel):
+    __tablename__ = 'seller'
 
-    @property
-    def phone(self) -> str:
-        return self.__phone
 
-    @phone.setter
-    def phone(self, phone: str) -> None:
-        self.__phone = phone
+    name = Column(String(length=80))
+    email = Column(String(length=50))
+    phone = Column(String(length=15))
 
-    @property
-    def email(self) -> str:
-        return self.__email
+def __init__(self, name:str, email:str, phone:str):
+    self.name = name
+    self.email = email
+    self.phone = phone
 
-    @email.setter
-    def email(self, email: str) -> None:
-        self.__email = email
-
-    @property
-    def id(self) -> int:
-        return self.__id
-
-    @id.setter
-    def id(self, id: int) -> None:
-        self.__id = id
+def __str__(self):
+    return f'Seller Name: {self.name} - Seller id: {self.id}
