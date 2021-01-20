@@ -63,7 +63,10 @@ def cadastrar_produtos(action):
             ProductController().save(pr)
             return redirect("/")
         elif action == 'Update':
-            pr = Product(request.form['name_input'], request.form['description_input'], request.form['price_input'], request.form['id_input'])
+            pr = ProductController().read_by_id(request.form['id_input'])
+            pr.name = request.form['name_input']
+            pr.description = request.form['description_input']
+            pr.price = request.form['price_input']
             ProductController().update(pr)
             return redirect("/list_products")
     return render_template('create_product.html', produtos=pr, action='Create')
