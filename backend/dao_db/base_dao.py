@@ -6,9 +6,10 @@ class BaseDao:
     def __init__(self, type_model):
         self.__type_model = type_model
 
-    def save(self, model:BaseModel) -> None:
-        session.add(model)
-        session.commit()
+    def save(self, model: BaseModel) -> None:
+        with Session() as session:
+            session.add(model)
+            session.commit()
 
     def read_by_id(self, id:int) -> BaseModel:
         with Session() as session:
@@ -21,6 +22,6 @@ class BaseDao:
         return result
     
     def delete(self, model:BaseModel) -> None:
-        with Session as session:
+        with Session() as session:
             session.delete(model)
             session.commit()

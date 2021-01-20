@@ -124,16 +124,18 @@ def deletar_categorias(id):
 def cadastrar_sellers(action):
     sel = None
     if request.method == 'POST':
-        if action == 'Save':
+        if action == 'Create':
             data = Seller(request.form['name_input'], request.form['contact_input'], request.form['email_input'])
             SellerController().save(data)
-            return redirect("/")
+            return redirect("/list_sellers")
         elif action == 'Update':
-            sel = Seller(request.form['name_input'], request.form['contact_input'], request.form['email_input'],
-                         request.form['id_input'])
+            sel = SellerController().read_by_id(request.form['id_input'])
+            sel.name = request.form['name_input']
+            sel.phone = request.form['contact_input']
+            sel.email = request.form['email_input']
             SellerController().update(sel)
             return redirect("/list_sellers")
-    return render_template('save_seller.html', seller=sel, action="Save")
+    return render_template('create_seller.html', seller=sel, action="Create")
 
 
 @app.route('/list_sellers')
@@ -150,7 +152,8 @@ def atualizar_seller(id):
 
 @app.route('/delete_seller/<id>')
 def deletar_seller(id):
-    SellerController().delete(id)
+    sel = SellerController().read_by_id(id)
+    SellerController().delete(sel)
     return redirect('/list_sellers')
 
 
