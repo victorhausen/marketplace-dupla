@@ -27,10 +27,12 @@ def cadastrar_marketplaces(action):
     if request.method == 'POST':
         if action == 'Create':
             mp = Marketplace(request.form['name_input'], request.form['description_input'])
-            MarketplaceController().create(mp)
+            MarketplaceController().save(mp)
             return redirect("/")
         elif action == 'Update':
-            mp = Marketplace(request.form['name_input'], request.form['description_input'], request.form['id_input'])
+            mp = MarketplaceController().read_by_id(request.form['id_input'])
+            mp.name = request.form['name_input']
+            mp.description=request.form['description_input']
             MarketplaceController().update(mp)
             return redirect("/list_marketplaces")
     return render_template('create_marketplace.html', marketplace=mp, action="Create")
@@ -50,7 +52,8 @@ def atualizar_marketplace(id):
 
 @app.route('/delete_marketplace/<id>')
 def deletar_marketplace(id):
-    MarketplaceController().delete(id)
+    mp = MarketplaceController().read_by_id(id)
+    MarketplaceController().delete(mp)
     return redirect('/list_marketplaces')
 
 
