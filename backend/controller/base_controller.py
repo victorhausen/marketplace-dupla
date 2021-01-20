@@ -8,7 +8,7 @@ class BaseController:
         self.__dao = dao
         self.__model_name = model_name
 
-    def save(self, model: BaseModel) -> None:
+    def create(self, model: BaseModel) -> None:
         self.__dao.save(model)
         self.__log.create(self.__model_name)
 

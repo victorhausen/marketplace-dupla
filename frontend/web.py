@@ -27,7 +27,7 @@ def cadastrar_marketplaces(action):
     if request.method == 'POST':
         if action == 'Create':
             mp = Marketplace(request.form['name_input'], request.form['description_input'])
-            MarketplaceController().save(mp)
+            MarketplaceController().create(mp)
             return redirect("/")
         elif action == 'Update':
             mp = MarketplaceController().read_by_id(request.form['id_input'])
@@ -63,7 +63,7 @@ def cadastrar_produtos(action):
     if request.method == 'POST':
         if action == 'Create':
             pr = Product(request.form['name_input'], request.form['description_input'], request.form['price_input'])
-            ProductController().save(pr)
+            ProductController().create(pr)
             return redirect("/")
         elif action == 'Update':
             pr = ProductController().read_by_id(request.form['id_input'])
@@ -100,7 +100,7 @@ def cadastrar_categorias(action):
     if request.method == 'POST':
         if action == 'Create':
             ca = Category(request.form['name'], request.form['description'])
-            CategoryController().save(ca)
+            CategoryController().create(ca)
             return redirect("/")
         elif action == 'Update':
             ca = CategoryController().read_by_id(request.form['id_input'])
@@ -136,7 +136,7 @@ def cadastrar_sellers(action):
     if request.method == 'POST':
         if action == 'Create':
             data = Seller(request.form['name_input'], request.form['contact_input'], request.form['email_input'])
-            SellerController().save(data)
+            SellerController().create(data)
             return redirect("/list_sellers")
         elif action == 'Update':
             sel = SellerController().read_by_id(request.form['id_input'])
