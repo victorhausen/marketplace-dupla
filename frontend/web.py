@@ -1,3 +1,5 @@
+import sys 
+sys.path.append('.')
 
 from flask import Flask, render_template, request, redirect
 from backend.controller.marketplace_controller import MarketplaceController
@@ -91,10 +93,12 @@ def cadastrar_categorias(action):
     if request.method == 'POST':
         if action == 'Create':
             ca = Category(request.form['name'], request.form['description'])
-            CategoryController().create(ca)
+            CategoryController().save(ca)
             return redirect("/")
         elif action == 'Update':
-            ca = Category(request.form['name'], request.form['description'], request.form['id_input'])
+            ca = CategoryController().read_by_id(request.form['id_input'])
+            ca.name = request.form['name']
+            ca.description = request.form['description']
             CategoryController().update(ca)
             return redirect('/list_categories')
     return render_template('create_categories.html', categorias=ca, action='Create')
@@ -114,7 +118,8 @@ def atualizar_categorias(id):
 
 @app.route('/delete_categories/<id>')
 def deletar_categorias(id):
-    CategoryController().delete(id)
+    ca = CategoryController().read_by_id(id)
+    CategoryController().delete(ca)
     return redirect('/list_categories')
 
 
@@ -124,11 +129,13 @@ def cadastrar_sellers(action):
     if request.method == 'POST':
         if action == 'Create':
             data = Seller(request.form['name_input'], request.form['contact_input'], request.form['email_input'])
-            SellerController().create(data)
-            return redirect("/")
+            SellerController().save(data)
+            return redirect("/list_sellers")
         elif action == 'Update':
-            sel = Seller(request.form['name_input'], request.form['contact_input'], request.form['email_input'],
-                         request.form['id_input'])
+            sel = SellerController().read_by_id(request.form['id_input'])
+            sel.name = request.form['name_input']
+            sel.phone = request.form['contact_input']
+            sel.email = request.form['email_input']
             SellerController().update(sel)
             return redirect("/list_sellers")
     return render_template('create_seller.html', seller=sel, action="Create")
@@ -148,7 +155,8 @@ def atualizar_seller(id):
 
 @app.route('/delete_seller/<id>')
 def deletar_seller(id):
-    SellerController().delete(id)
+    sel = SellerController().read_by_id(id)
+    SellerController().delete(sel)
     return redirect('/list_sellers')
 
 
