@@ -1,29 +1,14 @@
-class Category:
-    def __init__(self, name: str, description: str, id: int = None) -> None:
-        self.__name = name
-        self.__description = description
-        self.__id = id
+from sqlalchemy import Column, String
+from backend.models.base_model import BaseModel
 
-    @property
-    def name(self):
-        return self.__name
 
-    @name.setter
-    def name(self, name):
-        self.__name = name
+class Category(BaseModel):
+    __tablename__ = 'category'
 
-    @property
-    def description(self):
-        return self.__description
+    name = Column(String(length=80))
+    description = Column(String(length=100))
 
-    @description.setter
-    def description(self, description):
-        self.__description = description
 
-    @property
-    def id(self):
-        return self.__id
-
-    @id.setter
-    def id(self, id):
-        self.__id = id
+    def __init__(self, name: str, description: str):
+        self.name = name
+        self.description = description
