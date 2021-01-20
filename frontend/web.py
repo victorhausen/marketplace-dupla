@@ -60,7 +60,7 @@ def cadastrar_produtos(action):
     if request.method == 'POST':
         if action == 'Create':
             pr = Product(request.form['name_input'], request.form['description_input'], request.form['price_input'])
-            ProductController().create(pr)
+            ProductController().save(pr)
             return redirect("/")
         elif action == 'Update':
             pr = Product(request.form['name_input'], request.form['description_input'], request.form['price_input'], request.form['id_input'])
@@ -83,7 +83,8 @@ def atualizar_produtos(id):
 
 @app.route('/delete_products/<id>')
 def deletar_produtos(id):
-    ProductController().delete(id)
+    prod = ProductController().read_by_id(id)
+    ProductController().delete(prod)
     return redirect('/list_products')
 
 
