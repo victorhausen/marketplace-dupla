@@ -12,21 +12,23 @@
     </thead>
     <tbody>
     {% for i in log %}
+    {% set action = i.description.split()[0] %}
+    {% set type_ = i.description.split()[1] %}
         <tr>
             <td>{{i.date}}</td>
-            {% if i.action == 'read_all' or i.action == 'read_by_id' %}
-            <td style="background-color:red">{{i.action}}</td>
+            {% if action == 'read_all' or action == 'read_by_id' %}
+            <td style="background-color:red">{{action}}</td>
             {% endif %}
-            {% if i.action == 'create' %}
-            <td style="background-color:blue">{{i.action}}</td>
+            {% if action == 'create' %}
+            <td style="background-color:blue">{{action}}</td>
             {% endif %}
-            {% if i.action == 'update' %}
-            <td style="background-color:green">{{i.action}}</td>
+            {% if action == 'update' %}
+            <td style="background-color:green">{{action}}</td>
             {% endif %}
-            {% if i.action == 'delete' %}
-            <td style="background-color:yellow">{{i.action}}</td>
+            {% if action == 'delete' %}
+            <td style="background-color:yellow">{{action}}</td>
             {% endif %}
-            <td>{{i.type_}}</td>
+            <td>{{type_}}</td>
         </tr>
     {% endfor %}
     </tbody>

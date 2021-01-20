@@ -9,11 +9,7 @@ class Seller(BaseModel):
     email = Column(String(length=50))
     phone = Column(String(length=15))
 
-
     def __init__(self, name: str, phone: str, email: str):
         self.name = name
         self.email = email
         self.phone = phone
-
-# def __str__(self):
-#     return f'Seller Name: {self.name} - Seller id: {self.id}
