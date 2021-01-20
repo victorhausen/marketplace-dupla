@@ -1,38 +1,16 @@
-class Product:
+from sqlalchemy import Column, String 
+from backend.models.base_model import BaseModel
+from sqlalchemy.dialects.postgresql import MONEY
+
+class Product(BaseModel):
+    __tablename__ = 'product'
+
+    name = Column(String(length=200))
+    description = Column(String(length=500))
+    price = Column(MONEY())
+
     def __init__(self, name: str, description: str, price: float, id: int = None) -> None:
-        self.__name = name
-        self.__description = description
-        self.__price = price
-        self.__id = id
-
-    @property
-    def name(self):
-        return self.__name
-
-    @name.setter
-    def name(self, name):
-        self.__name = name
-
-    @property
-    def description(self):
-        return self.__description
-
-    @description.setter
-    def description(self, description):
-        self.__description = description
-
-    @property
-    def price(self):
-        return self.__price
-
-    @price.setter
-    def price(self, price):
-        self.__price = price
-
-    @property
-    def id(self):
-        return self.__id
-
-    @id.setter
-    def id(self, id):
-        self.__id = id
+        self.name = name
+        self.description = description
+        self.price = price
+        self.id = id
